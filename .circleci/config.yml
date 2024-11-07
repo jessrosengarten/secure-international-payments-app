@@ -27,9 +27,9 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get upgrade -y
       - run: sudo apt-get install -y openssh-client git curl
-      - run: sudo apt-get install -y openjdk-17-jdk
       - run: sudo apt-get install -y ca-certificates-java
       - run: sudo update-ca-certificates -f
+      - run: sudo apt-get install -y openjdk-17-jdk
       - checkout
       - run: find .
       - attach_workspace:
