@@ -13,6 +13,11 @@ jobs:
             unzip sonar-scanner.zip
             mv sonar-scanner-4.6.2.2472-linux sonar-scanner
       - run:
+          name: Set Java Home
+          command: |
+            export JAVA_HOME=/usr/local/openjdk-17
+            export PATH=$JAVA_HOME/bin:$PATH
+      - run:
           name: Run SonarQube Scanner
           command: |
             ./sonar-scanner/bin/sonar-scanner \
