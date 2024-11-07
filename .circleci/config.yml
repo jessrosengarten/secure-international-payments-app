@@ -27,6 +27,7 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get upgrade -y
       - run: sudo apt-get install -y openssh-client git curl
+      - run: sudo apt-get install -y openjdk-17-jdk
       - checkout
       - run: find .
       - attach_workspace:
@@ -41,18 +42,17 @@ jobs:
           SONAR_BRANCH="${CIRCLE_BRANCH:-master}"
           echo "Sonar branch value is: " $SONAR_BRANCH
           echo "Sonar org value is : "$SONAR_ORG
-          docker run --rm -v $(pwd):/usr/src -w /usr/src cimg/openjdk:17.0 /bin/bash -c "
-            export PATH=$PATH:/usr/src/sonar-scanner/bin
-            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-            sonar-scanner \
-            -Dsonar.projectKey=\"$SONAR_PROJECT_KEY\" \
-            -Dsonar.organization=\"$SONAR_ORG\" \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.exclusions=\"**/android/**,**/ios/**\" \
-            -Dsonar.login=\"$SONAR_TOKEN\" \
-            -Dsonar.branch.name=\"$SONAR_BRANCH\" \
-            -Dsonar.sources=\".\"
-          "
+          sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+          java -version
+          sonar-scanner \
+          -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
+          -Dsonar.organization="$SONAR_ORG" \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.exclusions="**/android/**,**/ios/**" \
+          -Dsonar.login="$SONAR_TOKEN" \
+          -Dsonar.branch.name="$SONAR_BRANCH" \
+          -Dsonar.sources="."
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
