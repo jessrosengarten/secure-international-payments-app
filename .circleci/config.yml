@@ -24,9 +24,8 @@ jobs:
       - image: sonarsource/sonar-scanner-cli
     resource_class: small
     steps:
+      - checkout
       - run: find .
-      - attach_workspace:
-          at: ~/workspace
       - run: |
           SONAR_BRANCH="${CIRCLE_BRANCH:-master}"
           echo "Sonar branch value is: " $SONAR_BRANCH
