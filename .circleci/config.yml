@@ -11,8 +11,8 @@ jobs:
       - run:
           name: Install SSH client
           command: |
-            sudo apt-get update
-            sudo apt-get install -y openssh-client
+            apt-get update
+            apt-get install -y openssh-client
       - checkout
       - run:
           name: Download and install SonarQube Scanner
