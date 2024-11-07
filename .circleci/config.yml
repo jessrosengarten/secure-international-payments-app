@@ -46,7 +46,6 @@ jobs:
           -Dsonar.sources="."
 
 workflows:
-  version: 2
   say-hello-workflow:
     jobs:
       - say-hello
