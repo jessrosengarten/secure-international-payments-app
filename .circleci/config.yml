@@ -3,16 +3,16 @@ version: 2.1
 jobs:
   sonar:
     docker:
-      - image: circleci/openjdk:17-jdk
+      - image: cimg/openjdk:17.0
     environment:
-      JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
-      PATH: /usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
+      JAVA_HOME: /usr/local/openjdk-17
+      PATH: /usr/local/openjdk-17/bin:$PATH
     steps:
       - run:
           name: Install SSH client
           command: |
-            apt-get update
-            apt-get install -y openssh-client
+            sudo apt-get update
+            sudo apt-get install -y openssh-client
       - checkout
       - run:
           name: Download and install SonarQube Scanner
