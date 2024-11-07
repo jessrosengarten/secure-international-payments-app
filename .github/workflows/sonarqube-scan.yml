@@ -1,0 +1,55 @@
+name: SonarCloud DevSecOps
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Backend steps
+    - name: Verify `package.json` exists in Backend
+      run: |
+        if [ ! -f Backend/package.json ]; then
+          echo "Error: package.json not found in the Backend directory"
+          exit 1
+        fi
+
+    - name: Set up Node.js for Backend
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14' # Specify the Node.js version you are using
+
+    - name: Install dependencies for Backend
+      run: npm install
+      working-directory: Backend
+
+    - name: Run tests for Backend
+      run: npm test
+      working-directory: Backend
+
+    - name: Set up Java 17 for SonarQube
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Run SonarQube analysis for Backend
+      run: |
+        npm install -g sonar-scanner
+        sonar-scanner \
+          -Dsonar.projectKey=apdspoepart2_backend \
+          -Dsonar.organization=apdspoepart2 \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONARCLOUD_TOKEN \
+          -Dsonar.branch.name=${{ github.ref_name }} \
+          -Dsonar.c.file.suffixes=- \
+          -Dsonar.cpp.file.suffixes=- \
+          -Dsonar.objc.file.suffixes=-
+      env:
+        GITHUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
+        SONARCLOUD_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+      working-directory: Backend
