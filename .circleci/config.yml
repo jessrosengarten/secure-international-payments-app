@@ -8,6 +8,11 @@ jobs:
       JAVA_HOME: /usr/local/openjdk-17
       PATH: /usr/local/openjdk-17/bin:$PATH
     steps:
+      - run:
+          name: Install SSH client
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y openssh-client
       - checkout
       - run:
           name: Download and install SonarQube Scanner
