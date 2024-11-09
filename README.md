@@ -20,6 +20,7 @@ and make secure international payments. Once a payment has been initiated it is 
   - Only pre-registered employees can log in without the need for registration.
 
 ## Employee Login Details
+  - Please use the following to access the employee portal: http://localhost:3000/admin
   - Username: Emp001 - Password: Emp001@password
   - Username: Emp002 - Password: Emp002@password
 
