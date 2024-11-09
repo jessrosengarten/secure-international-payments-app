@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios"
 import './style.css'
 import { accountInfoRegex, amountRegex, providerCodeRegex } from './validationHelper'
+import authentication from './authentication'
 
 const CustomerDashboard = () => {
     const [amount, setAmount] = useState('');
@@ -32,7 +33,7 @@ const CustomerDashboard = () => {
                     console.error('Error fetching payment history', error);
                 });
         }
-    }, []);
+    }, [navigate]);
     const handleNext = () => {
 
         setErrors({}) // Clear previous errors
@@ -46,6 +47,7 @@ const CustomerDashboard = () => {
         setShowAccountInfo(true) // Show Account Information section
     };
 
+    //Method that handles the payment
     const handlePayment = (e) => {
         e.preventDefault()
 
@@ -75,9 +77,17 @@ const CustomerDashboard = () => {
             .then(response => {
                 alert(response.data.message);
                 navigate('/customerDashboard')
+                window.location.reload()
             })
-            alert(`Payment processed.\nAccount: ${accountInfo}\nProvider Code: ${providerCode}`);
+        alert(`Payment processed.\nAccount: ${accountInfo}\nProvider Code: ${providerCode}`);
         setShowAccountInfo(false); // Reset back to Payments section after the payment is processed
+    };
+
+    //Method to handle logout
+    const handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        navigate('/login');
     };
 
     return (
@@ -139,7 +149,7 @@ const CustomerDashboard = () => {
                             Next
                         </button>
                         <p className="account-text">
-                            <Link to="/login" className="link">Logout</Link>
+                            <Link to="/login" onClick={handleLogout} className="link">Logout</Link>
                         </p>
                     </div>
                 </div>
@@ -185,4 +195,4 @@ const CustomerDashboard = () => {
     );
 };
 
-export default CustomerDashboard;
+export default authentication(CustomerDashboard);

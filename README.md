@@ -20,9 +20,8 @@ and make secure international payments. Once a payment has been initiated it is 
   - Only pre-registered employees can log in without the need for registration.
 
 ## Employee Login Details
-  - Username: Emp001 - Password: emp1password
-  - Username: Emp002 - Password: emp2password
-  - Username: Emp003 - Password: emp3password
+  - Username: Emp001 - Password: Emp001@password
+  - Username: Emp002 - Password: Emp002@password
 
 ## Security Features:
 1. Password Hashing and Salting:

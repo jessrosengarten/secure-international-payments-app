@@ -331,6 +331,8 @@ form .account-text a:hover {
 .payment-history {
     width: 50%;
     padding-right: 130px;
+    max-height: 440px; 
+    overflow-y: auto;
 }
 
 /* Payment Form Section */
