@@ -59,6 +59,8 @@ and make secure international payments. Once a payment has been initiated it is 
 ![SonarQubeScan](https://github.com/user-attachments/assets/7bacbb55-0e72-4e2b-aeb0-634f54882980)
 ![circleCITests](https://github.com/user-attachments/assets/896d280d-6532-4d44-ae5f-856ff8cd2979)
 ![sonarcloudoverview](https://github.com/user-attachments/assets/f3a7a26d-7303-4945-aacd-2c4769dcbe09)
+![image](https://github.com/user-attachments/assets/5de9594b-8660-4b63-92f4-a047a225c754)
+
 
 
 
